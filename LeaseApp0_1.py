@@ -20,7 +20,7 @@ client = openai.AzureOpenAI(
         api_key= config["AZURE_API_KEY"],
         api_version="2023-12-01-preview")
 
-st.set_page_config(page_title="Feedback App",
+st.set_page_config(page_title="Lease App",
                    layout="wide",
                    initial_sidebar_state="expanded"
                    )
@@ -83,13 +83,13 @@ def main_page():
         # Add a file uploader widget
         examined_file = st.file_uploader("Upload Word/PDF file to verify for lease presence", type=["doc", "docx", "pdf"])
 
-        col1, col2 = st.columns(2)
-        with col1:
-            LeaseTrue_file = st.file_uploader("[Optional] Upload a sample lease contract to augment the analysis ", type=["doc", "docx", "pdf"])
-        with col2:
-            LeaseFalse_file = st.file_uploader("[Optional] Upload a sample NON-lease contract to enhance analysis accuracy", type=["doc", "docx", "pdf"])
+        with st.expander("Extra options"):
+            col1, col2 = st.columns(2)
+            with col1:
+                LeaseTrue_file = st.file_uploader("[Optional] Upload a sample lease contract to augment the analysis ", type=["doc", "docx", "pdf"])
+            with col2:
+                LeaseFalse_file = st.file_uploader("[Optional] Upload a sample NON-lease contract to enhance analysis accuracy", type=["doc", "docx", "pdf"])
 
-        with st.expander("Your prompt"):
             examined_feed = st.text_area("Main part, edit if adequate", value = examined_prompt)
             LeaseTrue_feed = st.text_area("Sample lease contract part (optional), edit if adequate", value = LeaseTrue_prompt)
             LeaseFalse_feed = st.text_area("Sample non-lease contract part (optional), edit if adequate", value = LeaseFalse_prompt)
