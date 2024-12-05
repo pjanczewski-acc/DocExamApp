@@ -85,20 +85,23 @@ def main_page():
 
         col1, col2 = st.columns(2)
         with col1:
-            LeaseTrue_file = st.file_uploader("Upload a sample CORRECT lease contract", type=["doc", "docx", "pdf"])
+            LeaseTrue_file = st.file_uploader("[Optional] Upload a sample lease contract to augment the analysis ", type=["doc", "docx", "pdf"])
         with col2:
-            LeaseFalse_file = st.file_uploader("Upload a sample INCORRECT lease contract", type=["doc", "docx", "pdf"])
+            LeaseFalse_file = st.file_uploader("[Optional] Upload a sample NON-lease contract to enhance analysis accuracy", type=["doc", "docx", "pdf"])
 
         with st.expander("Your prompt"):
             examined_feed = st.text_area("Main part, edit if adequate", value = examined_prompt)
-            LeaseTrue_feed = st.text_area("Sample CORRECT part (optional), edit if adequate", value = LeaseTrue_prompt)
-            LeaseFalse_feed = st.text_area("Sample INCORRECT part (optional), edit if adequate", value = LeaseFalse_prompt)
+            LeaseTrue_feed = st.text_area("Sample lease contract part (optional), edit if adequate", value = LeaseTrue_prompt)
+            LeaseFalse_feed = st.text_area("Sample non-lease contract part (optional), edit if adequate", value = LeaseFalse_prompt)
             st.write("")
-            months_back_val = st.slider("How rigorous you want the verification to be?: 1=Very liberal, 5=Very strict",
+            rigidness_val = st.slider("How rigorous you want the verification to be?: 1=Very liberal, 5=Very strict",
                                     min_value=1, max_value=5, value=3)
             st.write("")
                 
         # Premilinary listing before final export
+        
+        outcome_display = st.checkbox("Display verification outcome", value = True)
+        outcome_record = st.checkbox("Write the outcome to the database", value = True)
         
         produce = st.form_submit_button("Verify the document")
 
@@ -135,7 +138,7 @@ def main_page():
             output = str(outcome).replace('\\n', '\n').replace('\\t', '\t')
             st.download_button('Download feedback scenario', data = output, file_name=output_file_name, mime='text/csv')
 
-        st.write("https://www.youtube.com/watch?v=WNnzw90vxrE of this form")
+        st.markdown('[This is the end](https://www.youtube.com/watch?v=WNnzw90vxrE) of this form')
 
         
 ##############
@@ -148,7 +151,6 @@ hide_streamlit_style = """
             footer {visibility: hidden;}
             </style>
             """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 main_page()
 
