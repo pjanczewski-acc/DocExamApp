@@ -70,9 +70,9 @@ def main_page():
         st.image(orange_logo, use_column_width=True)
 
     st.write('')
-    st.markdown("<h1><b>Verify consistency of contract with IFRS 16</b></h1>", unsafe_allow_html=True)
+    st.markdown("<h1><b>Determine content of a document</b></h1>", unsafe_allow_html=True)
         
-    with st.form("Lease analysis", clear_on_submit=False):
+    with st.form("Contract analysis", clear_on_submit=False):
 
         examined_prompt = "Lorem ipsum 1. Is the main file a lease contract?"
 
@@ -81,7 +81,23 @@ def main_page():
         LeaseFalse_prompt = "Lorem ipsum 3. This is a sample incorrect lease contract, use to determine if the main file isn't a lease contract."
         
         # Add a file uploader widget
-        examined_file = st.file_uploader("Upload Word/PDF file to verify for lease presence", type=["doc", "docx", "pdf"])
+        examined_file = st.file_uploader("Upload Word/PDF file to examine", type=["doc", "docx", "pdf"])
+
+        with st.expander("Scope of examination", expanded = True):
+            col1, col2 = st.columns(2)
+            with col1:
+                exam_asset = st.checkbox("Is there an identified asset?", value = True)
+                exam_lease = st.checkbox("Is it a lease contract (as per IFRS 16)?", value = True)
+                exam_annex = st.checkbox("Is it an annex to another contract?", value = False)
+                exam_modif = st.checkbox("Is it an annex modifying the base as per MSSF 16?", value = False)
+                exam_prlng = st.checkbox("Is there a prolongation option, how likely is it?", value = False)
+            with col2:
+                exam_value = st.checkbox("What is the contract value?", value = False)
+                exam_currn = st.checkbox("What is the contract currency?", value = False)
+                exam_freqn = st.checkbox("What is the payment frequency?", value = False)
+                exam_schdl = st.checkbox("Are the payments spread over time evenly, what is their schedule?", value = False)
+                exam_index = st.checkbox("Are the payments indexed (against inflation or fixed value)?", value = False)
+
 
         with st.expander("Extra options"):
             col1, col2 = st.columns(2)
@@ -103,7 +119,7 @@ def main_page():
         outcome_display = st.checkbox("Display verification outcome", value = True)
         outcome_record = st.checkbox("Write the outcome to the database", value = True)
         
-        produce = st.form_submit_button("Verify the document")
+        produce = st.form_submit_button("Examine the document")
 
         if produce:
             
