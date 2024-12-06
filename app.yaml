@@ -1,5 +1,5 @@
 command: [
   "streamlit", 
   "run",
-  "LeaseApp0_1.py"
+  "DocExamApp0_1.py"
 ]
