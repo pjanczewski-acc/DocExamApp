@@ -20,7 +20,7 @@ client = openai.AzureOpenAI(
         api_key= config["AZURE_API_KEY"],
         api_version="2023-12-01-preview")
 
-st.set_page_config(page_title="Lease App",
+st.set_page_config(page_title="Document Examination App",
                    layout="wide",
                    initial_sidebar_state="expanded"
                    )
