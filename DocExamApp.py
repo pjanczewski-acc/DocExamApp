@@ -110,8 +110,9 @@ def main_page():
             LeaseTrue_feed = st.text_area("Sample lease contract part (optional), edit if adequate", value = LeaseTrue_prompt)
             LeaseFalse_feed = st.text_area("Sample non-lease contract part (optional), edit if adequate", value = LeaseFalse_prompt)
             st.write("")
-            rigidness_val = st.slider("How strict you want the verification to be?, help: 1=Very liberal (risk of invalid a 'yes'/'no' outcome), 5=Very strict (risk of a 'hard to say' outcome)",
-                                    min_value=1, max_value=5, value=3)
+            rigidness_val = st.slider("How cautious you want the verification to be?: 1=Very liberal, 5=Very strict",
+                                      help="Liberal = risk of false yes/no (low temperature); \n Strict = risk of a 'hard to say' (high temperature)",
+                                      min_value=1, max_value=5, value=3)
             st.write("")
                 
         # Premilinary listing before final export
