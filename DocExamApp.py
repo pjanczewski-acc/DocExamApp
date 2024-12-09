@@ -87,37 +87,37 @@ def main_page():
             col1, col2 = st.columns(2)
             with col1:
                 exam_asset = st.checkbox("Is there an identified asset?", value = True)
-                exam_lease = st.checkbox("Is it a lease contract (as per IFRS 16)?", value = True)
-                exam_annex = st.checkbox("Is it an annex to another contract?", value = False)
-                exam_modif = st.checkbox("Is it an annex modifying the base as per MSSF 16?", value = False)
-                exam_prlng = st.checkbox("Is there a prolongation option, how likely is it?", value = False)
+                exam_lease = st.checkbox("Is it a lease contract (as per IFRS 16)?", value = False, disabled = True)
+                exam_annex = st.checkbox("Is it an annex to another contract?", value = False, disabled = True)
+                exam_modif = st.checkbox("Is it an annex modifying the base as per MSSF 16?", value = False, disabled = True)
+                exam_prlng = st.checkbox("Is there a prolongation option, how likely is it?", value = False, disabled = True)
             with col2:
                 exam_value = st.checkbox("What is the contract value?", value = False)
-                exam_currn = st.checkbox("What is the contract currency?", value = False)
-                exam_freqn = st.checkbox("What is the payment frequency?", value = False)
-                exam_schdl = st.checkbox("Are the payments spread over time evenly, what is their schedule?", value = False)
-                exam_index = st.checkbox("Are the payments indexed (against inflation or fixed value)?", value = False)
+                exam_currn = st.checkbox("What is the contract currency?", value = False, disabled = True)
+                exam_freqn = st.checkbox("What is the payment frequency?", value = False, disabled = True)
+                exam_schdl = st.checkbox("Are the payments spread over time evenly, what is their schedule?", value = False, disabled = True)
+                exam_index = st.checkbox("Are the payments indexed (against inflation or fixed value)?", value = False, disabled = True)
 
 
         with st.expander("Extra options"):
             col1, col2 = st.columns(2)
             with col1:
-                LeaseTrue_file = st.file_uploader("[Optional] Upload a sample lease contract to augment the analysis ", type=["doc", "docx", "pdf"])
+                LeaseTrue_file = st.file_uploader("[Optional] Upload a sample SIMILAR contract to enrich the comparison base", type=["doc", "docx", "pdf"])
             with col2:
-                LeaseFalse_file = st.file_uploader("[Optional] Upload a sample NON-lease contract to enhance analysis accuracy", type=["doc", "docx", "pdf"])
+                LeaseFalse_file = st.file_uploader("[Optional] Upload a sample DISSIMILAR contract to enrich the comparison base", type=["doc", "docx", "pdf"])
 
             examined_feed = st.text_area("Main part, edit if adequate", value = examined_prompt)
             LeaseTrue_feed = st.text_area("Sample lease contract part (optional), edit if adequate", value = LeaseTrue_prompt)
             LeaseFalse_feed = st.text_area("Sample non-lease contract part (optional), edit if adequate", value = LeaseFalse_prompt)
             st.write("")
-            rigidness_val = st.slider("How rigorous you want the verification to be?: 1=Very liberal, 5=Very strict",
+            rigidness_val = st.slider("How strict you want the verification to be?, help: 1=Very liberal (risk of invalid a 'yes'/'no' outcome), 5=Very strict (risk of a 'hard to say' outcome)",
                                     min_value=1, max_value=5, value=3)
             st.write("")
                 
         # Premilinary listing before final export
         
         outcome_display = st.checkbox("Display verification outcome", value = True)
-        outcome_record = st.checkbox("Write the outcome to the database", value = True)
+        outcome_record = st.checkbox("Write the outcome to the database", value = False, disabled = True)
         
         produce = st.form_submit_button("Examine the document")
 
