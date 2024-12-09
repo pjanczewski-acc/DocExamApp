@@ -112,13 +112,14 @@ def main_page():
             st.write("")
             rigidness_val = st.slider("How cautious you want the verification to be?: 1=Very liberal, 5=Very strict",
                                       help="Liberal = risk of false yes/no (low temperature); \n Strict = risk of a 'hard to say' (high temperature)",
-                                      min_value=1, max_value=5, value=3)
+                                      min_value=1, max_value=5, value=3, disabled=True)
             st.write("")
                 
         # Premilinary listing before final export
         
         outcome_display = st.checkbox("Display verification outcome", value = True)
         outcome_record = st.checkbox("Write the outcome to the database", value = False, disabled = True)
+        outcome_csvfile = st.checkbox("Write the outcome to a csv file", value = False, disabled = True)
         
         produce = st.form_submit_button("Examine the document")
 
