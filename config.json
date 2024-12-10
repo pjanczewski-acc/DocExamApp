@@ -1,4 +1,6 @@
 {
-    "AZURE_API_KEY": "8ce97b1fd89c40ac86ee50509fa10e18",  
-    "AZURE_ENDPOINT": "https://polandai-dev-01-openai-01.openai.azure.com/"  
+    "AZURE_API_KEY": "b10a11f5d91f4a34b41010bb8da07351",  
+    "AZURE_ENDPOINT": "https://swedencentral.api.cognitive.microsoft.com/",
+    "AZURE_GPT_DEPLOYMENT_NAME": "gpt-4o-2024-08-06",
+    "AZURE_OPENAI_API_VERSION": "2024-08-01-preview"
 }
